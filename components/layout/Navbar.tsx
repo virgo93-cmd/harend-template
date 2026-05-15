@@ -45,13 +45,13 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 z-[100] w-full transition-all duration-500 ${
           isScrolled || isMobileMenuOpen
-            ? "bg-black/95 backdrop-blur-2xl py-4 border-b border-white/5" 
+            ? "bg-black/90 backdrop-blur-2xl py-3 border-b border-white/5" 
             : "bg-transparent py-6"
         }`}
       >
         <div className="max-w-[1440px] mx-auto flex items-center justify-between px-6 md:px-12 lg:px-24">
           
-          {/* LOGO & BRAND */}
+          {/* LOGO & BRAND - Dikasih Z-Index tinggi biar nggak ketutup menu mobile */}
           <NextLink href="/" className="flex items-center gap-3 group cursor-pointer z-[110]">
             <Image 
               src={navbarData.logo} 
@@ -68,7 +68,7 @@ export default function Navbar() {
             </div>
           </NextLink>
 
-          {/* DESKTOP NAVIGATION (Hidden on Mobile) */}
+          {/* DESKTOP NAVIGATION - Hidden on Mobile */}
           <div className="hidden lg:flex items-center gap-10">
             {navbarData.navLinks.map((link) => (
               <NextLink
@@ -92,7 +92,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* RIGHT ACTION & HAMBURGER */}
+          {/* RIGHT ACTION */}
           <div className="flex items-center gap-4 lg:gap-8 z-[110]">
             <NextLink 
               href="/pricing"
@@ -100,12 +100,12 @@ export default function Navbar() {
                 isActive("/pricing") ? "text-white" : "text-white/40 hover:text-white"
               }`}
             >
-              Pricing
+              {navbarData.actionLinks.pricing.title}
             </NextLink>
 
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 overflow-hidden group transition-all hover:border-cyan-500/50 shadow-2xl"
+              className="relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 overflow-hidden group transition-all hover:border-cyan-400 shadow-2xl"
             >
               <div className="relative z-10 flex items-center gap-2">
                 <span className="text-[11px] font-black text-white uppercase tracking-widest group-hover:text-cyan-400 transition-colors">
@@ -128,8 +128,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE MENU OVERLAY (Blok Terpisah biar nggak acak-acakan) */}
-        <div className={`fixed inset-0 bg-[#050505] z-[90] lg:hidden flex flex-col items-center justify-center gap-8 transition-all duration-500 ${
+        {/* MOBILE OVERLAY MENU - Biar nggak nabrak Logo, kita buat di layer z-[90] */}
+        <div className={`fixed inset-0 bg-black/98 flex flex-col items-center justify-center gap-6 transition-all duration-500 lg:hidden z-[90] ${
           isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
         }`}>
           {navbarData.navLinks.map((link) => (
@@ -137,12 +137,12 @@ export default function Navbar() {
               key={link.id}
               href={link.path}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex flex-col items-center group"
+              className="flex flex-col items-center group py-2"
             >
-              <span className="text-[10px] font-mono text-cyan-500/50 uppercase tracking-[0.4em] mb-2">
+              <span className="text-[10px] font-mono text-cyan-500/50 uppercase tracking-[0.4em] mb-1">
                 {link.label}
               </span>
-              <span className={`text-3xl font-black uppercase italic tracking-tighter ${
+              <span className={`text-2xl font-black uppercase italic tracking-tighter ${
                 isActive(link.path) ? "text-cyan-400" : "text-white"
               }`}>
                 {link.title}
@@ -154,7 +154,7 @@ export default function Navbar() {
               setIsMobileMenuOpen(false);
               setIsAuthModalOpen(true);
             }}
-            className="mt-6 px-10 py-4 rounded-full bg-cyan-500 text-xs font-black text-black uppercase tracking-[0.2em]"
+            className="mt-4 px-10 py-4 rounded-full bg-cyan-500 text-xs font-black text-black uppercase tracking-[0.2em]"
           >
             Access_Neural_Hub
           </button>
