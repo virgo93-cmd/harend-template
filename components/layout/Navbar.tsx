@@ -6,6 +6,7 @@ import { default as NextLink } from "next/link";
 import { usePathname } from "next/navigation";
 import { navbarData } from "@/data/global/navbar";
 import AuthModal from "@/components/ui/AuthModal";
+import NavbarMobile from "./NavbarMobile";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -16,20 +17,13 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
@@ -49,10 +43,9 @@ export default function Navbar() {
             : "bg-transparent py-6"
         }`}
       >
-        <div className="max-w-[1440px] mx-auto flex items-center justify-between px-6 md:px-12 lg:px-24">
+        <div className="max-w-360 mx-auto flex items-center justify-between px-6 md:px-12 lg:px-24">
           
-          {/* LOGO & BRAND - Dikasih Z-Index tinggi biar nggak ketutup menu mobile */}
-          <NextLink href="/" className="flex items-center gap-3 group cursor-pointer z-[110]">
+          <NextLink href="/" className="flex items-center gap-3 group cursor-pointer z-[160]">
             <Image 
               src={navbarData.logo} 
               alt={navbarData.brandName} 
@@ -68,7 +61,7 @@ export default function Navbar() {
             </div>
           </NextLink>
 
-          {/* DESKTOP NAVIGATION - Hidden on Mobile */}
+          {/* DESKTOP NAVIGATION */}
           <div className="hidden lg:flex items-center gap-10">
             {navbarData.navLinks.map((link) => (
               <NextLink
@@ -92,8 +85,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* RIGHT ACTION */}
-          <div className="flex items-center gap-4 lg:gap-8 z-[110]">
+          <div className="flex items-center gap-4 lg:gap-8 z-[160]">
             <NextLink 
               href="/pricing"
               className={`hidden md:block text-[11px] font-black uppercase tracking-widest transition-colors ${
@@ -105,61 +97,38 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 overflow-hidden group transition-all hover:border-cyan-400 shadow-2xl"
+              className="relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 overflow-hidden group transition-all hover:border-cyan-500/50 shadow-2xl"
             >
               <div className="relative z-10 flex items-center gap-2">
                 <span className="text-[11px] font-black text-white uppercase tracking-widest group-hover:text-cyan-400 transition-colors">
                   Get Access
                 </span>
+                <svg className="w-3 h-3 text-white group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7-7 7" />
+                </svg>
               </div>
+              <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
 
-            {/* HAMBURGER BUTTON */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-white active:scale-90 transition-transform"
+              className="lg:hidden p-2 text-white transition-transform active:scale-90"
             >
               <div className="w-6 h-5 relative flex flex-col justify-between">
-                <span className={`w-full h-0.5 bg-white transition-all ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
-                <span className={`w-full h-0.5 bg-white transition-opacity ${isMobileMenuOpen ? "opacity-0" : ""}`} />
-                <span className={`w-full h-0.5 bg-white transition-all ${isMobileMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`} />
+                <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2.5" : ""}`} />
+                <span className={`w-full h-0.5 bg-white transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`} />
+                <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
               </div>
             </button>
           </div>
         </div>
-
-        {/* MOBILE OVERLAY MENU - Biar nggak nabrak Logo, kita buat di layer z-[90] */}
-        <div className={`fixed inset-0 bg-black/98 flex flex-col items-center justify-center gap-6 transition-all duration-500 lg:hidden z-[90] ${
-          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-        }`}>
-          {navbarData.navLinks.map((link) => (
-            <NextLink
-              key={link.id}
-              href={link.path}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex flex-col items-center group py-2"
-            >
-              <span className="text-[10px] font-mono text-cyan-500/50 uppercase tracking-[0.4em] mb-1">
-                {link.label}
-              </span>
-              <span className={`text-2xl font-black uppercase italic tracking-tighter ${
-                isActive(link.path) ? "text-cyan-400" : "text-white"
-              }`}>
-                {link.title}
-              </span>
-            </NextLink>
-          ))}
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              setIsAuthModalOpen(true);
-            }}
-            className="mt-4 px-10 py-4 rounded-full bg-cyan-500 text-xs font-black text-black uppercase tracking-[0.2em]"
-          >
-            Access_Neural_Hub
-          </button>
-        </div>
       </nav>
+
+      <NavbarMobile 
+        isOpen={isMobileMenuOpen} 
+        setIsOpen={setIsMobileMenuOpen} 
+        onAuthOpen={() => setIsAuthModalOpen(true)}
+      />
 
       <AuthModal 
         isOpen={isAuthModalOpen} 
