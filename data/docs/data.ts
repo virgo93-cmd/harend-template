@@ -10,16 +10,16 @@ export const docsSidebar = [
     label: "Corporate Profile",
     links: [
       { id: "mission", title: "Vision & Mission", path: "/docs" },
-      { id: "standard", title: "Quality Standards", path: "/docs/standards" },
-      { id: "license", title: "Commercial Terms", path: "/docs/license" }
+      { id: "standard", title: "Quality Standards", path: "/docs" },
+      { id: "license", title: "Commercial Terms", path: "/docs" }
     ]
   },
   {
     id: "services",
     label: "Business Services",
     links: [
-      { id: "custom", title: "Custom Development", path: "/docs/custom" },
-      { id: "support", title: "Partner Support", path: "/docs/support" }
+      { id: "custom", title: "Custom Development", path: "/docs" },
+      { id: "support", title: "Partner Support", path: "/docs" }
     ]
   }
 ];
