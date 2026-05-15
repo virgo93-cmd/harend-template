@@ -1,0 +1,51 @@
+export const featuresData = {
+  title: "Elevate Your Capabilities",
+  subtitle: "Experience the next evolution of digital workflow with our advanced AI-driven solutions.",
+  features: [
+    {
+      id: 1,
+      title: "Next-Gen AI Intelligence",
+      description: "Leverage advanced predictive models and neural networks for smarter, data-driven decisions.",
+      icon: "/assets/icons/icon-300x300-01.png",
+      color: "from-cyan-500/20 to-transparent",
+      borderColor: "border-cyan-500/30",
+      glowColor: "text-cyan-400", // Untuk sinkronisasi dengan efek kodingan
+    },
+    {
+      id: 2,
+      title: "Neural Workflow Automation",
+      description: "Streamline complex business processes with intelligent, self-learning automated systems.",
+      icon: "/assets/icons/icon-300x300-02.png",
+      color: "from-magenta-500/20 to-transparent",
+      borderColor: "border-magenta-500/30",
+      glowColor: "text-magenta-500",
+    },
+    {
+      id: 3,
+      title: "Real-time Data Intelligence",
+      description: "Gain instantaneous insights and visualize live data streams with zero latency processing.",
+      icon: "/assets/icons/icon-300x300-03.png",
+      color: "from-green-500/20 to-transparent",
+      borderColor: "border-green-500/30",
+      glowColor: "text-green-400",
+    },
+    {
+      id: 4,
+      title: "Generative Content Engine",
+      description: "Unlock unparalleled creative output for diverse media needs using generative AI models.",
+      icon: "/assets/icons/icon-300x300-04.png",
+      color: "from-purple-500/20 to-transparent",
+      borderColor: "border-purple-500/30",
+      glowColor: "text-purple-500",
+    },
+    {
+      id: 5,
+      title: "Seamless API Integration",
+      description: "Effortlessly connect and unify your entire technology stack with our robust API gateway.",
+      icon: "/assets/icons/icon-300x300-05.png",
+      color: "from-cyan-500/20 to-transparent",
+      borderColor: "border-cyan-500/30",
+      glowColor: "text-cyan-400",
+    },
+  ],
+};
