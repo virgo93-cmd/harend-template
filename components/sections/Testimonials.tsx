@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { testimonialsData } from "@/data/sections/testimonials";
@@ -16,6 +16,12 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev - 1 + testimonialsData.reviews.length) % testimonialsData.reviews.length);
   };
 
+  // Tambahkan Auto-play agar lebih interaktif di mobile
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative w-full bg-ai-black pb-24 lg:pb-32 overflow-hidden">
       {/* MODERN WEB3 DIVIDER */}
@@ -24,7 +30,7 @@ export default function Testimonials() {
       </div>
 
       <div className="relative z-10 max-w-360 mx-auto px-6 md:px-12 lg:px-24 pt-16 lg:pt-20">
-        <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-24">
           
           {/* SISI KIRI: HEADER */}
           <div className="w-full lg:w-1/3">
@@ -45,7 +51,7 @@ export default function Testimonials() {
                 {testimonialsData.title}
               </h2>
               
-              <p className="text-white/30 text-sm md:text-base font-medium leading-relaxed">
+              <p className="text-white/30 text-sm md:text-base font-medium leading-relaxed max-w-md">
                 {testimonialsData.description}
               </p>
             </motion.div>
@@ -53,19 +59,21 @@ export default function Testimonials() {
 
           {/* SISI KANAN: SLIDER */}
           <div className="w-full lg:w-2/3 relative">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-80">
+            {/* Grid 1 Kolom di Mobile, 2 Kolom di Tablet/Desktop */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-[320px] md:min-h-80">
               <AnimatePresence mode="popLayout" initial={false}>
-                {testimonialsData.reviews.slice(currentIndex, currentIndex + 2).map((review) => (
+                {/* Logika slice: Di mobile tampil 1, di desktop tampil 2 */}
+                {testimonialsData.reviews.slice(currentIndex, currentIndex + (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 2)).map((review) => (
                   <motion.div
                     key={`${review.id}-${currentIndex}`}
                     initial={{ opacity: 0, scale: 0.95, y: 10 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: -10 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="relative p-8 rounded-4xl bg-white/3 border border-white/5 backdrop-blur-xl group hover:border-purple-500/30 transition-all duration-500"
+                    className="relative p-6 md:p-8 rounded-[32px] md:rounded-4xl bg-white/3 border border-white/5 backdrop-blur-xl group hover:border-purple-500/30 transition-all duration-500"
                   >
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="relative shrink-0 w-14 h-14 rounded-full overflow-hidden border-2 border-purple-500/20 group-hover:border-purple-500 transition-colors">
+                      <div className="relative shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-purple-500/20 group-hover:border-purple-500 transition-colors">
                         <Image
                           src={review.image}
                           alt={review.name}
@@ -75,10 +83,10 @@ export default function Testimonials() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold uppercase italic tracking-wider text-sm">
+                        <h4 className="text-white font-bold uppercase italic tracking-wider text-xs md:text-sm">
                           {review.name}
                         </h4>
-                        <p className="text-white/30 text-[10px] font-bold uppercase tracking-widest">
+                        <p className="text-white/30 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
                           {review.role}
                         </p>
                       </div>
@@ -92,7 +100,7 @@ export default function Testimonials() {
                       ))}
                     </div>
 
-                    <p className="text-white/50 text-sm leading-relaxed italic font-medium">
+                    <p className="text-white/50 text-xs md:text-sm leading-relaxed italic font-medium">
                       "{review.comment}"
                     </p>
                   </motion.div>
@@ -101,20 +109,20 @@ export default function Testimonials() {
             </div>
 
             {/* CONTROLS */}
-            <div className="flex items-center gap-4 mt-12">
+            <div className="flex items-center gap-4 mt-10 md:mt-12">
               <button 
                 onClick={prevSlide}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-500 transition-all group"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-500 transition-all group"
               >
-                <svg className="w-5 h-5 text-white/30 group-hover:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-white/30 group-hover:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
               <button 
                 onClick={nextSlide}
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-500 transition-all group bg-linear-to-br from-purple-500 to-magenta-600 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-purple-500 transition-all group bg-linear-to-br from-purple-500 to-magenta-600 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
               >
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                 </svg>
               </button>
