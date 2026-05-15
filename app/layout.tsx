@@ -22,19 +22,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-[#050505]">
-        {/* Kursor Efek di layer global */}
-        <CursorEffect />
-        
-        {/* Navigasi Utama */}
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased bg-[#050505] min-h-screen flex flex-col">
+        {/* Navbar di layer paling atas */}
         <Navbar />
         
-        {/* Main Content Area */}
-        {children}
+        {/* Main content dikasih container biar gak nabrak fixed navbar */}
+        <div className="flex-1 flex flex-col relative z-0">
+          {children}
+        </div>
 
-        {/* Footer Perusahaan */}
         <Footer />
+
+        {/* Efek kursor ditaruh paling bawah biar nggak nge-block klik navigasi */}
+        <CursorEffect />
       </body>
     </html>
   );

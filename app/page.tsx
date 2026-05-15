@@ -5,7 +5,6 @@ import EcosystemPreview from "@/components/sections/EcosystemPreview";
 import PricingPreview from "@/components/sections/PricingPreview";
 import Testimonials from "@/components/sections/Testimonials";
 
-// Komponen Divider Internal untuk konsistensi Web3 Style
 const SectionDivider = () => (
   <div className="w-full px-6 md:px-12 lg:px-24">
     <div className="w-full h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
@@ -14,7 +13,7 @@ const SectionDivider = () => (
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden bg-[#050505]">
+    <main className="w-full bg-[#050505]">
       {/* 1. Hero Section */}
       <Hero />
       
