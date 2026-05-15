@@ -1,11 +1,19 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { introContent } from "@/data/docs/data";
 
 export default function DocsPage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
-    /* JAWABANNYA DISINI: pt-32 untuk mobile, pt-44 untuk desktop */
     <div className="max-w-4xl mx-auto pt-32 md:pt-44 pb-20 px-6 space-y-12 md:space-y-16 relative z-10">
       
       {/* SECTION: INTRO */}
@@ -27,7 +35,6 @@ export default function DocsPage() {
         <h3 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-6 md:mb-8 text-emerald-500/50">
           Corporate_Assets
         </h3>
-        {/* Grid: 1 kolom di mobile, 2 kolom di tablet ke atas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {introContent.techStack.map((tech, idx) => (
             <motion.div

@@ -25,6 +25,14 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
@@ -60,10 +68,10 @@ export default function Navbar() {
             </div>
           </NextLink>
 
-          {/* NAVIGATION OVERLAY */}
+          {/* CENTER NAVIGATION - FIXED FOR MOBILE */}
           <div className={`${
             isMobileMenuOpen 
-              ? "flex fixed inset-0 bg-black/95 flex-col justify-center items-center gap-8 z-[65] pt-10" 
+              ? "flex fixed inset-0 bg-[#050505] flex-col justify-center items-center gap-6 z-[65] pt-12" 
               : "hidden lg:flex items-center gap-10"
           }`}>
             
@@ -73,17 +81,17 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="group relative flex flex-col items-center py-2"
             >
-              <span className={`text-[9px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
+              <span className={`text-[8px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
                 isActive("/explore") ? "text-cyan-500" : "text-white/20 group-hover:text-cyan-500/50"
               }`}>
                 Neural_Hub
               </span>
               <div className="flex items-center gap-2">
-                <span className={`font-mono text-[12px] lg:text-[10px] text-cyan-500 transition-opacity ${isActive("/explore") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
-                <span className={`text-2xl lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
+                <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive("/explore") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
+                <span className={`text-lg lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
                   isActive("/explore") ? "text-cyan-400" : "text-white/60 group-hover:text-white"
                 }`}>Explore</span>
-                <span className={`font-mono text-[12px] lg:text-[10px] text-cyan-500 transition-opacity ${isActive("/explore") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
+                <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive("/explore") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
               </div>
             </NextLink>
 
@@ -93,17 +101,17 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="group relative flex flex-col items-center py-2"
             >
-              <span className={`text-[9px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
+              <span className={`text-[8px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
                 isActive("/solutions") ? "text-cyan-500" : "text-white/20 group-hover:text-cyan-500/50"
               }`}>
                 Neural_Matrix
               </span>
               <div className="flex items-center gap-2">
-                <span className={`font-mono text-[12px] lg:text-[10px] text-cyan-500 transition-opacity ${isActive("/solutions") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
-                <span className={`text-2xl lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
+                <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive("/solutions") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
+                <span className={`text-lg lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
                   isActive("/solutions") ? "text-cyan-400" : "text-white/60 group-hover:text-white"
                 }`}>Solutions</span>
-                <span className={`font-mono text-[12px] lg:text-[10px] text-cyan-500 transition-opacity ${isActive("/solutions") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
+                <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive("/solutions") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
               </div>
             </NextLink>
 
@@ -113,17 +121,17 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="group relative flex flex-col items-center py-2"
             >
-              <span className={`text-[9px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
+              <span className={`text-[8px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
                 isActive("/ecosystem") ? "text-emerald-500" : "text-white/20 group-hover:text-emerald-500/50"
               }`}>
                 Neural_Ecosystem
               </span>
               <div className="flex items-center gap-2">
-                <span className={`font-mono text-[12px] lg:text-[10px] text-emerald-500 transition-opacity ${isActive("/ecosystem") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
-                <span className={`text-2xl lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
+                <span className={`font-mono text-[10px] text-emerald-500 transition-opacity ${isActive("/ecosystem") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
+                <span className={`text-lg lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
                   isActive("/ecosystem") ? "text-emerald-400" : "text-white/60 group-hover:text-white"
                 }`}>Ecosystem</span>
-                <span className={`font-mono text-[12px] lg:text-[10px] text-emerald-500 transition-opacity ${isActive("/ecosystem") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
+                <span className={`font-mono text-[10px] text-emerald-500 transition-opacity ${isActive("/ecosystem") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
               </div>
             </NextLink>
 
@@ -133,17 +141,17 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="group relative flex flex-col items-center py-2"
             >
-              <span className={`text-[9px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
+              <span className={`text-[8px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
                 isActive("/docs") ? "text-emerald-500" : "text-white/20 group-hover:text-emerald-500/50"
               }`}>
                 Neural_Manual
               </span>
               <div className="flex items-center gap-2">
-                <span className={`font-mono text-[12px] lg:text-[10px] text-emerald-500 transition-opacity ${isActive("/docs") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
-                <span className={`text-2xl lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
+                <span className={`font-mono text-[10px] text-emerald-500 transition-opacity ${isActive("/docs") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
+                <span className={`text-lg lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
                   isActive("/docs") ? "text-emerald-400" : "text-white/60 group-hover:text-white"
                 }`}>Docs</span>
-                <span className={`font-mono text-[12px] lg:text-[10px] text-emerald-500 transition-opacity ${isActive("/docs") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
+                <span className={`font-mono text-[10px] text-emerald-500 transition-opacity ${isActive("/docs") ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
               </div>
             </NextLink>
 
@@ -155,17 +163,17 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="group relative flex flex-col items-center py-2"
               >
-                <span className={`text-[9px] lg:text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
+                <span className={`text-[8px] font-mono tracking-[0.3em] mb-1 uppercase transition-colors ${
                   isActive(link.path) ? "text-cyan-500" : "text-white/20 group-hover:text-cyan-500/50"
                 }`}>
                   {link.label}
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className={`font-mono text-[12px] lg:text-[10px] text-cyan-500 transition-opacity ${isActive(link.path) ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
-                  <span className={`text-2xl lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
+                  <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive(link.path) ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
+                  <span className={`text-lg lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
                     isActive(link.path) ? "text-cyan-400" : "text-white/60 group-hover:text-white"
                   }`}>{link.title}</span>
-                  <span className={`font-mono text-[12px] lg:text-[10px] text-cyan-500 transition-opacity ${isActive(link.path) ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
+                  <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive(link.path) ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
                 </div>
               </NextLink>
             ))}
