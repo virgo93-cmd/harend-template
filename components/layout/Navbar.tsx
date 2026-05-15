@@ -38,6 +38,7 @@ export default function Navbar() {
 
   const isActive = (path: string) => pathname === path || pathname.startsWith(path + "/");
 
+  // FIX ERROR #418: Jangan render apapun sampai browser siap
   if (!mounted) return null;
 
   return (
@@ -68,10 +69,10 @@ export default function Navbar() {
             </div>
           </NextLink>
 
-          {/* CENTER NAVIGATION - FIXED FOR MOBILE */}
+          {/* CENTER NAVIGATION - FIXED LAYOUT & FONT SIZE */}
           <div className={`${
             isMobileMenuOpen 
-              ? "flex fixed inset-0 bg-[#050505] flex-col justify-center items-center gap-6 z-[65] pt-12" 
+              ? "flex fixed inset-0 bg-[#050505] flex-col justify-center items-center gap-6 z-[65] pt-10" 
               : "hidden lg:flex items-center gap-10"
           }`}>
             
@@ -171,7 +172,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                   <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive(link.path) ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>[</span>
                   <span className={`text-lg lg:text-[11px] font-black uppercase tracking-widest transition-colors ${
-                    isActive(link.path) ? "text-cyan-400" : "text-white/60 group-hover:text-white"
+                    isActive(link.path) ? "text-cyan-400" : "text-white/40 group-hover:text-white"
                   }`}>{link.title}</span>
                   <span className={`font-mono text-[10px] text-cyan-500 transition-opacity ${isActive(link.path) ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>]</span>
                 </div>
