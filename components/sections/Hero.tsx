@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react"; // 1. Tambah useState
+import { useState } from "react"; 
 import Lottie from "lottie-react";
 import Typewriter from "typewriter-effect";
 import { heroData } from "@/data/sections/hero";
-import AuthModal from "@/components/ui/AuthModal"; // 2. Import AuthModal
+import AuthModal from "@/components/ui/AuthModal"; 
 
 export default function Hero() {
-  const [isAuthOpen, setIsAuthOpen] = useState(false); // 3. State modal
+  const [isAuthOpen, setIsAuthOpen] = useState(false); 
   const scrollingPartners = [...heroData.partners, ...heroData.partners, ...heroData.partners];
 
   return (
@@ -58,7 +58,8 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-6 md:px-12 lg:px-20 w-full max-w-360 mx-auto gap-12 text-white pt-10 pb-28 md:pt-12 md:pb-40">
+      {/* PADDING ADJUSTMENT: pt-32 untuk mobile agar tidak mepet Navbar */}
+      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-6 md:px-12 lg:px-20 w-full max-w-360 mx-auto gap-12 text-white pt-32 pb-28 md:pt-40 md:pb-40">
         
         {/* Left Side: Content */}
         <div className="relative flex flex-col items-start text-left w-full lg:w-[45%] shrink-0">
@@ -90,7 +91,6 @@ export default function Hero() {
             </p>
 
             <div className="mt-10">
-              {/* 4. Tambah Trigger Modal */}
               <button 
                 onClick={() => setIsAuthOpen(true)}
                 className="px-10 py-4 bg-white text-black font-bold rounded-full transition-all duration-300 hover:scale-105 hover:bg-linear-to-r hover:from-cyan-400 hover:to-magenta-500 hover:text-white active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer"
@@ -111,7 +111,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 5. Render Modal */}
       <AuthModal 
         isOpen={isAuthOpen} 
         onClose={() => setIsAuthOpen(false)} 
