@@ -9,9 +9,20 @@ export default function NavbarMobile({ isOpen, setIsOpen, onAuthOpen }: any) {
   const isActive = (path: string) => pathname === path || pathname.startsWith(path + "/");
 
   return (
-    <div className={`fixed inset-0 bg-[#050505] z-[150] lg:hidden flex flex-col items-center justify-center transition-all duration-500 ${
+    <div className={`fixed inset-0 bg-black z-[200] lg:hidden flex flex-col items-center justify-center transition-all duration-500 ${
       isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-full"
     }`}>
+      
+      {/* Tombol Close (X) di Pojok Kanan Atas */}
+      <button 
+        onClick={() => setIsOpen(false)}
+        className="absolute top-8 right-6 p-2 text-white active:scale-90 transition-transform"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
       <div className="flex flex-col items-center gap-8 w-full px-6">
         {navbarData.navLinks.map((link) => (
           <NextLink
